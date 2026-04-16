@@ -1,0 +1,55 @@
+{
+  "name": "@lvce-editor/blob-worker",
+  "version": "0.0.0-dev",
+  "description": "File System Worker",
+  "keywords": [
+    "Lvce Editor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lvce-editor/blob-worker.git"
+  },
+  "license": "MIT",
+  "author": "Lvce Editor",
+  "type": "module",
+  "main": "src/blobWorkerMain.ts",
+  "scripts": {
+    "dev": "cd ../../ && npm run dev",
+    "test": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --detectOpenHandles --forceExit",
+    "test:watch": "node --unhandled-rejections=warn --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch"
+  },
+  "jest": {
+    "injectGlobals": false,
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "useESM": true
+        }
+      ]
+    },
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 20,
+        "functions": 20,
+        "lines": 20
+      }
+    }
+  },
+  "devDependencies": {
+    "@jest/globals": "^30.2.0",
+    "@lvce-editor/rpc": "^5.4.0",
+    "@lvce-editor/rpc-registry": "^7.5.0",
+    "@lvce-editor/verror": "^1.7.0",
+    "blob-util": "^2.0.2",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6"
+  }
+}
