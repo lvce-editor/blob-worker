@@ -1,6 +1,6 @@
-# File System Worker
+# Blob Worker
 
-Web Worker for the file system functionality in LVCE Editor.
+Web Worker for the blob functionality in LVCE Editor.
 
 ## Contributing
 
