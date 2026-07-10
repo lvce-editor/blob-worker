@@ -3,7 +3,7 @@ import * as Terminate from '../src/parts/Terminate/Terminate.ts'
 
 test('terminate', () => {
   const mockClose = jest.fn()
-  globalThis.close = mockClose
+  Object.defineProperty(globalThis, 'close', { value: mockClose })
   Terminate.terminate()
   expect(mockClose).toHaveBeenCalled()
 })
