@@ -5,8 +5,8 @@ export const invokeAndTransfer = (method: string, ...params: readonly unknown[])
   return RendererWorker.invokeAndTransfer(method, ...params)
 }
 
-export const sendMessagePortToExtensionHostWorker = (port: MessagePort, rpcId?: number): Promise<void> => {
-  return RendererWorker.sendMessagePortToExtensionHostWorker(port, rpcId)
+export const sendMessagePortToExtensionHostWorker = (port: MessagePort, rpcId = 0): Promise<void> => {
+  return RendererWorker.sendMessagePortToExtensionManagementWorker(port, rpcId)
 }
 
 export const set = (rpc: Rpc): void => {
