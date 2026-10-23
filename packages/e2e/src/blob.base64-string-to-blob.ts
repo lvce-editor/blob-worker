@@ -8,5 +8,7 @@ export const test: Test = async ({ Command, expect }) => {
   const blob = await Command.execute('Blob.base64StringToBlob', base64String)
   const binaryString = await Command.execute('Blob.blobToBinaryString', blob)
 
-  expect(binaryString).toBe('Hello World')
+  if (binaryString !== 'Hello World') {
+    throw new Error(`Expected "Hello World", got ${JSON.stringify(binaryString)}`)
+  }
 }
