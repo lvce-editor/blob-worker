@@ -1,5 +1,4 @@
-import { base64StringToBlob } from 'blob-util'
-import { binaryStringToBlob, blobToBinaryString } from '../Blob/Blob.ts'
+import { base64StringToBlob, binaryStringToBlob, blobToBinaryString } from '../Blob/Blob.ts'
 import { handleMessagePort } from '../HandleMessagePort/HandleMessagePort.ts'
 import { terminate } from '../Terminate/Terminate.ts'
 
