@@ -3,12 +3,9 @@ import { babel } from '@rollup/plugin-babel'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import { join } from 'path'
 import { rollup } from 'rollup'
-import { root } from './root.js'
+import { root } from './root.ts'
 
-/**
- * @type {import('rollup').RollupOptions}
- */
-const options = {
+const options: import('rollup').RollupOptions = {
   input: join(root, 'packages/blob-worker/src/blobWorkerMain.ts'),
   preserveEntrySignatures: 'strict',
   treeshake: {
