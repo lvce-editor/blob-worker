@@ -10,8 +10,6 @@
     "type-check": "tsc"
   },
   "devDependencies": {
-    "@playwright/test": "1.60.0",
-    "@lvce-editor/test-with-playwright": "^16.0.0",
-    "playwright": "1.60.0"
+    "@lvce-editor/test-with-playwright": "^16.0.0"
   }
 }
