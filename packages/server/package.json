@@ -4,12 +4,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "node ./node_modules/@lvce-editor/server/bin/server.js --test-path=../e2e --blob-worker=../../.tmp/dist/dist/blobWorkerMain.js"
+    "dev": "node ../../node_modules/@lvce-editor/server/bin/server.js --test-path=../e2e --blob-worker=../../.tmp/dist/dist/blobWorkerMain.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@lvce-editor/server": "^0.127.2"
+    "@lvce-editor/server": "^0.127.3"
   }
 }
