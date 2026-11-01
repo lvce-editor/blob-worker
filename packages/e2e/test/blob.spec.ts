@@ -66,12 +66,37 @@ test('base64 round trip through the candidate worker', async ({ page }) => {
   expect(text).toBe('Hello World')
 })
 
-test('binary string preserves Blob size and type', async ({ page }) => {
-  const result = await page.evaluate(async () => {
-    const blob = await invokeBlobCommand('Blob.binaryStringToBlob', 'Hello World', 'text/plain')
-    return { size: blob.size, type: blob.type }
+test('base64 conversion preserves binary bytes', async ({ page }) => {
+  const bytes = await page.evaluate(async () => {
+    const blob = await invokeBlobCommand('Blob.base64StringToBlob', 'AP+A/w==')
+    const binaryString: string = await invokeBlobCommand('Blob.blobToBinaryString', blob)
+    return Array.from(binaryString, (character) => character.codePointAt(0))
   })
-  expect(result).toEqual({ size: 11, type: 'text/plain' })
+  expect(bytes).toEqual([0, 255, 128, 255])
+})
+
+test('binary string round trip preserves non-ASCII bytes, size and type', async ({ page }) => {
+  const result = await page.evaluate(async () => {
+    // eslint-disable-next-line e18e/prefer-string-fromcharcode
+    const binaryString = String.fromCodePoint(0, 127, 128, 255)
+    const blob = await invokeBlobCommand('Blob.binaryStringToBlob', binaryString, 'application/octet-stream')
+    const roundTrip: string = await invokeBlobCommand('Blob.blobToBinaryString', blob)
+    return {
+      bytes: Array.from(roundTrip, (character) => character.codePointAt(0)),
+      size: blob.size,
+      type: blob.type,
+    }
+  })
+  expect(result).toEqual({ bytes: [0, 127, 128, 255], size: 4, type: 'application/octet-stream' })
+})
+
+test('empty binary string round trips through an empty Blob', async ({ page }) => {
+  const result = await page.evaluate(async () => {
+    const blob = await invokeBlobCommand('Blob.binaryStringToBlob', '', 'text/plain')
+    const binaryString = await invokeBlobCommand('Blob.blobToBinaryString', blob)
+    return { binaryString, size: blob.size, type: blob.type }
+  })
+  expect(result).toEqual({ binaryString: '', size: 0, type: 'text/plain' })
 })
 
 test('invalid base64 returns the normalized error', async ({ page }) => {
