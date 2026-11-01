@@ -15,7 +15,9 @@
     },
     "packages/e2e": {
       "entry": ["src/**/*.ts", "test/**/*.ts"],
-      "project": ["src/**/*.ts", "test/**/*.ts"]
+      "project": ["src/**/*.ts", "test/**/*.ts"],
+      "ignoreDependencies": ["@playwright/test"],
+      "ignoreBinaries": ["playwright"]
     },
     "packages/server": {
       "entry": ["src/postinstall.js"],
