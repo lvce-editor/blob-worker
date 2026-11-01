@@ -1,5 +1,5 @@
 import { measureMemory } from '@lvce-editor/measure-memory'
-import { playwrightPath, threshold, workerPath, instantiations, instantiationsPath } from './config.ts'
+import { playwrightPath, threshold, workerPath, instantiations, instantiationsPath } from './measureMemoryConfig.ts'
 
 const main = async () => {
   await measureMemory({

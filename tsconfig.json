@@ -12,9 +12,6 @@
       "path": "./packages/server"
     },
     {
-      "path": "./packages/memory"
-    },
-    {
       "path": "./packages/e2e"
     }
   ]

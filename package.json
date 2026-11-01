@@ -12,6 +12,8 @@
     "build:static": "node packages/build/src/build-static.ts",
     "build:watch": "./packages/build/node_modules/.bin/esbuild --format=esm --bundle --external:node:buffer --external:electron --external:ws --external:node:worker_threads --watch packages/blob-worker/src/blobWorkerMain.ts --outfile=.tmp/dist/dist/blobWorkerMain.js",
     "dev": "node packages/build/src/dev.ts",
+    "measure": "node --experimental-strip-types packages/build/src/measureMemory.ts",
+    "measure:visible": "node --experimental-strip-types packages/build/src/measureMemory.ts --no-headless",
     "format": "prettier --write .",
     "lint": "eslint . && prettier --check .",
     "test": "npm test --workspaces --if-present",
