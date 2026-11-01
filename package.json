@@ -15,7 +15,7 @@
     "measure": "node --experimental-strip-types packages/build/src/measureMemory.ts",
     "measure:visible": "node --experimental-strip-types packages/build/src/measureMemory.ts --no-headless",
     "format": "prettier --write .",
-    "lint": "eslint . && prettier --check .",
+    "lint": "eslint . && prettier --check . && knip --no-config-hints",
     "test": "npm test --workspaces --if-present",
     "test-integration": "npm run test-integration --workspaces --if-present",
     "type-check": "tsc -b"
@@ -28,6 +28,7 @@
   "devDependencies": {
     "@lvce-editor/eslint-config": "^18.12.0",
     "eslint": "10.9.1",
+    "knip": "^6.41.0",
     "prettier": "^3.8.3",
     "typescript": "^6.0.3"
   },
