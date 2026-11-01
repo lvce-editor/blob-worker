@@ -32,7 +32,7 @@ Object.defineProperties(globalThis, {
           this.error = error as Error
           this.readyState = 2
           if (this.onerror) {
-            this.onerror({ target: this })
+            this.onerror(new ProgressEvent('error', { target: this }))
           }
           if (this.onloadend) {
             this.onloadend({ target: this })
@@ -125,6 +125,17 @@ test('blobToBinaryString should handle blob with special characters', async () =
   expect(binaryString).toHaveLength(specialText.length)
 })
 
+test('blobToBinaryString should wrap read errors and preserve the underlying error', async () => {
+  const readError = new Error('Blob read failed')
+  const blob = {
+    arrayBuffer: async () => {
+      throw readError
+    },
+  } as Blob
+
+  await expect(BlobModule.blobToBinaryString(blob)).rejects.toThrow('Failed to convert blob to binary string: Blob read failed')
+})
+
 test('binaryStringToBlob should convert valid binary string to blob', async () => {
   const binaryString = 'Hello World'
   const blob = await BlobModule.binaryStringToBlob(binaryString)
@@ -162,4 +173,8 @@ test('binaryStringToBlob should convert binary string without type', async () =>
   expect(blob).toBeInstanceOf(Blob)
   expect(blob.size).toBe(4)
   expect(blob.type).toBe('')
+})
+
+test('binaryStringToBlob should wrap binary strings that cannot be encoded as base64', async () => {
+  await expect(BlobModule.binaryStringToBlob('π')).rejects.toThrow('Failed to convert binary string to blob')
 })
