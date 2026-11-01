@@ -32,7 +32,9 @@ Object.defineProperties(globalThis, {
           this.error = error as Error
           this.readyState = 2
           if (this.onerror) {
-            this.onerror(new ProgressEvent('error', { target: this }))
+            const event = new ProgressEvent('error')
+            Object.defineProperty(event, 'target', { value: this })
+            this.onerror(event)
           }
           if (this.onloadend) {
             this.onloadend({ target: this })
@@ -131,7 +133,7 @@ test('blobToBinaryString should wrap read errors and preserve the underlying err
     arrayBuffer: async () => {
       throw readError
     },
-  } as Blob
+  } as unknown as Blob
 
   await expect(BlobModule.blobToBinaryString(blob)).rejects.toThrow('Failed to convert blob to binary string: Blob read failed')
 })
