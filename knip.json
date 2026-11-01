@@ -1,0 +1,25 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "workspaces": {
+    ".": {
+      "project": ["*.js"]
+    },
+    "packages/blob-worker": {
+      "entry": ["src/blobWorkerMain.ts", "test/**/*.test.ts"],
+      "project": ["src/**/*.ts", "test/**/*.ts"]
+    },
+    "packages/build": {
+      "entry": ["src/build.ts", "src/build-static.ts", "src/dev.ts", "src/measureMemory.ts", "src/computeNodeModulesCacheKey.ts"],
+      "project": ["src/**/*.js", "src/**/*.ts"],
+      "ignoreDependencies": ["esbuild"]
+    },
+    "packages/e2e": {
+      "entry": ["src/**/*.ts", "test/**/*.ts"],
+      "project": ["src/**/*.ts", "test/**/*.ts"]
+    },
+    "packages/server": {
+      "entry": ["src/postinstall.js"],
+      "project": ["src/**/*.js"]
+    }
+  }
+}
